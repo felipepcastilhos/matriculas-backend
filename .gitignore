@@ -34,3 +34,6 @@ build/
 
 # CSV grande ignorado
 src/main/resources/seed/matriculas.csv
+
+# Arquivos específicos do macOS
+.DS_Store
