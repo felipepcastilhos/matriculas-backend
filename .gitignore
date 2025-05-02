@@ -35,5 +35,8 @@ build/
 # CSV grande ignorado
 src/main/resources/seed/matriculas.csv
 
+# Arquivo de log de importação
+src/main/resources/logs/log-importacao.csv
+
 # Arquivos específicos do macOS
 .DS_Store
