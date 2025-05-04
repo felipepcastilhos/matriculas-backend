@@ -44,4 +44,28 @@ public class MatriculaController {
     public List<ConsultaResultado> top10Cursos2022PorModalidade(@RequestParam String modalidade) {
         return consultaService.consultarTop10CursosPor2022Modalidade(modalidade);
     }
+
+    @GetMapping("/total-por-ano/estado")
+    public List<ConsultaResultado> totalPorAnoEstado(@RequestParam String estado) {
+        return consultaService.getTotaisPorAnoEstado(estado);
+    }
+
+    @GetMapping("/total-por-ano/estado-modalidade")
+    public List<ConsultaResultado> totalPorAnoEstadoEModalidade(
+            @RequestParam String estado,
+            @RequestParam String modalidade) {
+        return consultaService.getTotaisPorAnoEstadoEModalidade(estado, modalidade);
+    }
+
+    @GetMapping("/top-cursos-2022/estado")
+    public List<ConsultaResultado> topCursos2022Estado(@RequestParam String estado) {
+        return consultaService.getTop10Cursos2022PorEstado(estado);
+    }
+
+    @GetMapping("/top-cursos-2022/estado-modalidade")
+    public List<ConsultaResultado> topCursos2022EstadoEModalidade(
+            @RequestParam String estado,
+            @RequestParam String modalidade) {
+        return consultaService.getTop10Cursos2022EstadoEModalidade(estado, modalidade);
+    }
 }

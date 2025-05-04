@@ -35,4 +35,20 @@ public class MatriculaService {
         }
         return dao.buscarTop10CursosPor2022ComModalidade(modalidade);
     }
+
+    public List<ConsultaResultado> getTotaisPorAnoEstado(String estado) {
+        return dao.buscarTotaisPorAnoEstado(estado);
+    }
+    
+    public List<ConsultaResultado> getTotaisPorAnoEstadoEModalidade(String estado, String modalidade) {
+        return dao.buscarTotaisPorAnoEstadoEModalidade(estado, modalidade);
+    }
+    
+    public List<ConsultaResultado> getTop10Cursos2022PorEstado(String estado) {
+        return dao.buscarTop10Cursos2022PorEstado(estado);
+    }
+    
+    public List<ConsultaResultado> getTop10Cursos2022EstadoEModalidade(String estado, String modalidade) {
+        return dao.buscarTop10Cursos2022EstadoEModalidade(estado, modalidade);
+    }
 }

@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MatriculasApplication implements CommandLineRunner {
 
     @Autowired
-    private CSVImportService csvImportService;
+    // private CSVImportService csvImportService;
 
     @Value("${spring.profiles.active:default}")
     private String activeProfile;
