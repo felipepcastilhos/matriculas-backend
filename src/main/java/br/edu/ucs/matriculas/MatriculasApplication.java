@@ -24,8 +24,9 @@ public class MatriculasApplication implements CommandLineRunner {
 	public void run(String... args) {
 		System.out.println("🔍 Profile ativo: " + activeProfile);
 		if ("dev".equalsIgnoreCase(activeProfile.trim())) {
-			System.out.println("🔁 Ambiente DEV detectado — iniciando importação do CSV...");
-			csvImportService.importarCSV();
+			// System.out.println("🔁 Ambiente DEV detectado — iniciando importação do CSV...");
+			// csvImportService.importarCSV();
+			System.out.println("🔁 Ambiente DEV detectado — importação já feita anteriormente!.");
 		} else {
 			System.out.println("✅ Ambiente não-DEV — importação de CSV ignorada.");
 		}

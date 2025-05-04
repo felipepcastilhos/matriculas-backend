@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * Representa o retorno de uma consulta agregada, como total de alunos por curso ou estado.
+ * Funciona como um DTO (Data Transfer Object) para encapsular o resultado de uma consulta, como total de alunos por curso ou estado.
  */
 @Data
 @AllArgsConstructor

@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * Representa os critérios utilizados para filtragem nas consultas.
+ * Parâmetros de entrada das consultas: útil quando quiser receber filtros como estado, ano ou modalidade nos endpoints
  */
 @Data
 public class ConsultaFiltro {
