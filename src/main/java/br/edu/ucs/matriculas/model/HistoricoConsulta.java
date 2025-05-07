@@ -1,8 +1,9 @@
 package br.edu.ucs.matriculas.model;
 
-import lombok.Data;
-
 import java.time.LocalDateTime;
+import java.util.List;
+
+import lombok.Data;
 
 /**
  * Armazena informações sobre uma consulta realizada e seu momento de execução.
@@ -10,6 +11,13 @@ import java.time.LocalDateTime;
  */
 @Data
 public class HistoricoConsulta {
-    private ConsultaFiltro filtro;       // Critérios da consulta
-    private LocalDateTime dataHora;      // Quando foi feita
+    private ConsultaFiltro filtro;
+    private LocalDateTime timestamp;
+    private List<ConsultaResultado> resultado;
+
+    public HistoricoConsulta(ConsultaFiltro filtro, LocalDateTime timestamp, List<ConsultaResultado> resultado) {
+        this.filtro = filtro;
+        this.timestamp = timestamp;
+        this.resultado = resultado;
+    }
 }

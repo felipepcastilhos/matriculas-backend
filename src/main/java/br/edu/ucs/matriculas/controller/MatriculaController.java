@@ -1,14 +1,16 @@
 package br.edu.ucs.matriculas.controller;
 
-import br.edu.ucs.matriculas.model.ConsultaResultado;
-import br.edu.ucs.matriculas.service.MatriculaService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.edu.ucs.matriculas.model.ConsultaResultado;
+import br.edu.ucs.matriculas.model.HistoricoConsulta;
+import br.edu.ucs.matriculas.service.MatriculaService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/consultas")
@@ -68,4 +70,10 @@ public class MatriculaController {
             @RequestParam String modalidade) {
         return consultaService.getTop10Cursos2022EstadoEModalidade(estado, modalidade);
     }
+
+    @GetMapping("/historico")
+    public List<HistoricoConsulta> getHistorico() {
+        return consultaService.getHistoricoConsultas();
+    }
+
 }
