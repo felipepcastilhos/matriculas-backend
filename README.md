@@ -130,6 +130,57 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
+## 🗄️ Persistência de Dados
+
+A aplicação utiliza o padrão de persistência baseado em Repository + DAO, utilizando um SGBD relacional (MySQL) para gerenciar os dados conforme recomendado para o projeto. A camada de persistência é responsável por gerenciar o ciclo de vida dos dados no database relacional MySQL, permitindo a execução de operações de leitura e gravação de forma eficiente e estruturada.
+
+## 🔄 Camada DAO (Data Access Object)
+
+A implementação da persistência é realizada através da classe RegistroMatriculaDAO, localizada em:
+
+```bash
+src/main/java/br/edu/ucs/matriculas/dao/RegistroMatriculaDAO.java
+```
+
+A classe utiliza o NamedParameterJdbcTemplate do Spring para:
+
+- Persistir em massa os registros importados do arquivo CSV para a tabela matriculas;
+- Realizar consultas agregadas e filtradas diretamente no banco de dados;
+- Garantir a execução de comandos SQL de forma otimizada e segura, evitando SQL Injection.
+
+## 📦 Camada Repository
+
+A interface MatriculaRepository define a assinatura do método de persistência:
+
+```bash
+public interface MatriculaRepository {
+    void salvarTodos(List<RegistroMatricula> registros);
+}
+```
+
+Atualmente, a interface está implementada por RegistroMatriculaDAO, respeitando o princípio de inversão de dependência (DIP) e permitindo, no futuro, uma fácil migração para Spring Data JPA, caso desejado.
+
+## 🌐 Gerenciamento de Perfis (Profiles)
+
+A aplicação possui dois perfis distintos para controle do processo de persistência:
+
+- `dev`: Executa o seed a partir do arquivo matriculas.csv para popular o banco de dados durante o desenvolvimento.
+- `prod`: Ignora o processo de seed, assumindo que o banco já está populado.
+
+A configuração dos perfis é definida no arquivo `application.properties`:
+
+```bash
+# Ambiente de Desenvolvimento (Dev) — realiza seed no startup
+spring.profiles.active=dev
+
+# Ambiente de Produção (Prod) — não realiza seed, assume banco populado
+# spring.profiles.active=prod
+```
+
+Para alternar entre os perfis, basta comentar/descomentar a linha correspondente no arquivo de configuração.
+
+---
+
 ## 📄 Licença
 
 Este projeto é apenas para fins educacionais, conforme solicitado na disciplina da UCS.
