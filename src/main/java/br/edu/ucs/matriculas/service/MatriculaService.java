@@ -59,23 +59,64 @@ public class MatriculaService {
         if (modalidade == null || (!modalidade.equalsIgnoreCase("EaD") && !modalidade.equalsIgnoreCase("Presencial"))) {
             throw new IllegalArgumentException("Modalidade inválida: deve ser 'EaD' ou 'Presencial'");
         }
-        return dao.buscarTop10CursosPor2022ComModalidade(modalidade);
-    }
+    
+        List<ConsultaResultado> resultado = dao.buscarTop10CursosPor2022ComModalidade(modalidade);
+    
+        // Criação do filtro para salvar no histórico
+        ConsultaFiltro filtro = new ConsultaFiltro();
+        filtro.setModalidade(modalidade);
+        filtro.setAno(2022);
+    
+        salvarHistorico(filtro, resultado);
+        return resultado;
+    }    
 
     public List<ConsultaResultado> getTotaisPorAnoEstado(String estado) {
-        return dao.buscarTotaisPorAnoEstado(estado);
+        List<ConsultaResultado> resultado = dao.buscarTotaisPorAnoEstado(estado);
+    
+        // Criação do filtro para salvar no histórico
+        ConsultaFiltro filtro = new ConsultaFiltro();
+        filtro.setEstado(estado);
+    
+        salvarHistorico(filtro, resultado);
+        return resultado;
     }
     
     public List<ConsultaResultado> getTotaisPorAnoEstadoEModalidade(String estado, String modalidade) {
-        return dao.buscarTotaisPorAnoEstadoEModalidade(estado, modalidade);
-    }
+        List<ConsultaResultado> resultado = dao.buscarTotaisPorAnoEstadoEModalidade(estado, modalidade);
+    
+        // Criação do filtro para salvar no histórico
+        ConsultaFiltro filtro = new ConsultaFiltro();
+        filtro.setEstado(estado);
+        filtro.setModalidade(modalidade);
+    
+        salvarHistorico(filtro, resultado);
+        return resultado;
+    }    
     
     public List<ConsultaResultado> getTop10Cursos2022PorEstado(String estado) {
-        return dao.buscarTop10Cursos2022PorEstado(estado);
-    }
+        List<ConsultaResultado> resultado = dao.buscarTop10Cursos2022PorEstado(estado);
+    
+        // Criação do filtro para salvar no histórico
+        ConsultaFiltro filtro = new ConsultaFiltro();
+        filtro.setEstado(estado);
+        filtro.setAno(2022); // Definido manualmente para especificar o ano da consulta
+    
+        salvarHistorico(filtro, resultado);
+        return resultado;
+    }    
     
     public List<ConsultaResultado> getTop10Cursos2022EstadoEModalidade(String estado, String modalidade) {
-        return dao.buscarTop10Cursos2022EstadoEModalidade(estado, modalidade);
+        List<ConsultaResultado> resultado = dao.buscarTop10Cursos2022EstadoEModalidade(estado, modalidade);
+    
+        // Criação do filtro para salvar no histórico
+        ConsultaFiltro filtro = new ConsultaFiltro();
+        filtro.setEstado(estado);
+        filtro.setModalidade(modalidade);
+        filtro.setAno(2022); // Definido manualmente para especificar o ano da consulta
+    
+        salvarHistorico(filtro, resultado);
+        return resultado;
     }
 
     private void salvarHistorico(ConsultaFiltro filtro, List<ConsultaResultado> resultado) {
