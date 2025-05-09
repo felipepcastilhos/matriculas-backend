@@ -1,14 +1,21 @@
 package br.edu.ucs.matriculas.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfig {
 
+    /**
+     * Método responsável por configurar a documentação da API utilizando OpenAPI.
+     * Define informações sobre o projeto, como título, versão, descrição e contato.
+     * 
+     * @return Um objeto OpenAPI configurado com os metadados da API.
+     */
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()

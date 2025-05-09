@@ -1,15 +1,16 @@
 package br.edu.ucs.matriculas.dao;
 
-import br.edu.ucs.matriculas.model.ConsultaResultado;
-import br.edu.ucs.matriculas.model.RegistroMatricula;
-import br.edu.ucs.matriculas.repository.MatriculaRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import br.edu.ucs.matriculas.model.ConsultaResultado;
+import br.edu.ucs.matriculas.model.RegistroMatricula;
+import br.edu.ucs.matriculas.repository.MatriculaRepository;
 
 @Repository
 public class RegistroMatriculaDAO implements MatriculaRepository {
@@ -17,6 +18,9 @@ public class RegistroMatriculaDAO implements MatriculaRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    /**
+     * Método para salvar todos os registros de matrícula no banco de dados.
+     */
     @Override
     public void salvarTodos(List<RegistroMatricula> registros) {
         String sql = "INSERT INTO matriculas (" +

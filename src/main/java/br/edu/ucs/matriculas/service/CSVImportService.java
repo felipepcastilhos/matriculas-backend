@@ -1,18 +1,25 @@
 package br.edu.ucs.matriculas.service;
 
-import br.edu.ucs.matriculas.dao.RegistroMatriculaDAO;
-import br.edu.ucs.matriculas.model.RegistroMatricula;
-import com.opencsv.CSVReader;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
+
+import br.edu.ucs.matriculas.dao.RegistroMatriculaDAO;
+import br.edu.ucs.matriculas.model.RegistroMatricula;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +27,21 @@ public class CSVImportService {
 
     private final RegistroMatriculaDAO matriculaDAO;
 
+    /**
+     * Método responsável por importar os dados do arquivo CSV e persistir no banco de dados.
+     * O método lê o arquivo `matriculas.csv` localizado em `/seed`, valida o número de colunas
+     * de cada linha e registra as linhas inválidas em um arquivo de log (`log-importacao.csv`). 
+     * Linhas válidas são mapeadas para objetos `RegistroMatricula` e persistidas no banco de dados.
+     * 
+     * Fluxo do método:
+     * 1. Leitura do cabeçalho e contagem das colunas esperadas.
+     * 2. Para cada linha:
+     *    - Verifica se o número de colunas está correto.
+     *    - Caso esteja correto, tenta mapear para um objeto `RegistroMatricula`.
+     *    - Se houver erro no mapeamento ou quantidade de colunas, registra no log.
+     * 3. Registra no log o número de linhas válidas, inválidas e a quantidade total lida.
+     * 4. Salva os registros válidos no banco utilizando o DAO.
+     */
     public void importarCSV() {
         List<RegistroMatricula> registrosValidos = new ArrayList<>();
         int totalLidas = 0;
@@ -70,6 +92,21 @@ public class CSVImportService {
         }
     }
 
+    /**
+     * Método responsável por mapear uma linha do CSV para um objeto `RegistroMatricula`.
+     * Este método utiliza a estratégia de mapeamento `HeaderColumnNameMappingStrategy` 
+     * da biblioteca OpenCSV para associar os valores do CSV aos atributos da entidade.
+     * 
+     * Fluxo do método:
+     * 1. Recebe o cabeçalho e os valores da linha como arrays de `String`.
+     * 2. Constrói um CSV temporário em memória para ser lido pelo `CsvToBean`.
+     * 3. Mapeia os valores para a classe `RegistroMatricula`.
+     * 4. Retorna o objeto populado.
+     * 
+     * @param header Array contendo os nomes das colunas do CSV.
+     * @param linha Array contendo os valores da linha do CSV.
+     * @return Objeto `RegistroMatricula` populado com os valores da linha.
+     */
     private RegistroMatricula parseLinha(String[] header, String[] linha) throws IOException {
         HeaderColumnNameMappingStrategy<RegistroMatricula> strategy = new HeaderColumnNameMappingStrategy<>();
         strategy.setType(RegistroMatricula.class);

@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ConsultaResultado {
-    private String chave;   // Pode ser o nome do curso, estado, etc.
+    private String chave;   // Pode ser o nome do curso, ano, etc.
     private int total;      // Quantidade de alunos
 }

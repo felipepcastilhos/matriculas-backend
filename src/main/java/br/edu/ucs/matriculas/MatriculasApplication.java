@@ -8,7 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.edu.ucs.matriculas.service.CSVImportService;
 
-
+/**
+ * Classe principal da aplicação que inicializa o contexto Spring Boot e executa tarefas específicas de acordo com o ambiente configurado (dev ou prod).
+ * 
+ * No ambiente "dev", realiza a importação dos dados do arquivo CSV para o banco de dados.
+ * No ambiente "prod", a importação é ignorada, assumindo que os dados já estão populados no banco.
+ * 
+ * O ambiente é definido através da propriedade "spring.profiles.active" no arquivo application.properties.
+ */
 @SpringBootApplication
 public class MatriculasApplication implements CommandLineRunner {
 
