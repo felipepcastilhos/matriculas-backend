@@ -95,7 +95,7 @@ src/main/java/br/edu/ucs/matriculas/service/MatriculaService.java
 
 A aplicação utiliza o padrão de persistência baseado em Repository + DAO, utilizando um SGBD relacional (MySQL) para gerenciar os dados conforme recomendado para o projeto. A camada de persistência é responsável por gerenciar o ciclo de vida dos dados no database relacional MySQL, permitindo a execução de operações de leitura e gravação de forma eficiente e estruturada.
 
-## 🔄 DAO Layer (Data Access Object)
+## 🔹 DAO Layer (Data Access Object)
 
 A implementação da persistência é realizada através da classe `RegistroMatriculaDAO`, localizada em:
 
@@ -109,7 +109,7 @@ A classe utiliza o NamedParameterJdbcTemplate do Spring para:
 - Realizar consultas agregadas e filtradas diretamente no banco de dados;
 - Garantir a execução de comandos SQL de forma otimizada e segura, evitando SQL Injection.
 
-## 📦 Repository Layer
+## 🔹 Repository Layer
 
 A interface `MatriculaRepository` define a assinatura do método que gerencia persistência:
 
